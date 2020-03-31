@@ -1,0 +1,17 @@
+.a {
+  list-style-type: circle;
+}
+
+.leftcontent{
+    margin-top: 10px;
+    background-color: #f5f8fa;
+    border:1px solid rgb(181, 211, 231);
+    padding: 10px;
+    border-radius: 10px;
+}
+.bottomcontent{
+  padding: 0px 0;
+  position: absolute;
+  text-align: center;
+  border: 1px solid black;
+}

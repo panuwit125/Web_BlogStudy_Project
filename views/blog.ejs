@@ -1,0 +1,11 @@
+<% if (results) { %>
+  <%- include('componentlogin/navbar.ejs') -%>
+    <div class="container">
+      <a href="/blog/add">+ AddBlog</a>
+    </div>
+<% } else { %>
+    <%- include('component/navbar.ejs') -%>
+    <div class="container">
+      <a href="/blog/add">+ AddBlog</a>
+    </div>
+<% } %>

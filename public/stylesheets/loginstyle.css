@@ -1,0 +1,12 @@
+.boxlogin{
+    width: 50%;
+    background-color: #fff;
+    opacity: 0.95;
+    border-radius: 1px;
+    padding: 2%;
+    margin: auto;
+}
+body{
+    font-family: 'Pridi', serif;
+    background-image: url(https://images.wallpaperscraft.com/image/lake_mountains_forest_152659_1920x1080.jpg);
+}

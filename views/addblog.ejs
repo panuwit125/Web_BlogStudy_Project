@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'editor' );
+    </script> 
+  </head>
+  <body style="font-family: 'Pridi', serif;">
+      <%- include component/navbar -%>
+      <div class="container" style="padding-top: 10px ;margin-top: 10px;">
+          <h1>เพิ่มกระทู้</h1><a href="/blog">ย้อนกลับ</a>
+            <form>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">ชื่อ</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="ชื่อของกระทู้">
+                </div>
+                <div class="form-group">
+                  <label>รายละเอียด</label><br>
+                  <textarea name="editor1" rows="8" cols="80" class="form-control" ></textarea>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-secondary btn-lg btn-block">เพิ่มกระทู้</button>
+                </div>
+              </form>
+              
+      </div>
+      <script>
+        CKEDITOR.replace( 'editor1' );
+      </script>
+  </body>
+</html>
