@@ -11,11 +11,18 @@ const {loginRouterPage,regisRouter,logRouter} = require('./routes/login');
 const port = 3000;
 
 const db = mysql.createConnection({
+    host: 'us-cdbr-iron-east-01.cleardb.net',
+    user: 'b782c7fb7f73e1',
+    password: '248d905b',
+    database: 'heroku_89925aedaf7b102'
+});
+
+/*const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'webblogDB'
-});
+});*/
 
 db.connect((err => {
     if (err) {
