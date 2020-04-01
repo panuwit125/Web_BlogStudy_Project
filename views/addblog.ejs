@@ -1,32 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace( 'editor' );
-    </script> 
-  </head>
-  <body style="font-family: 'Pridi', serif;">
-      <%- include component/navbar -%>
+
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+  <div style="font-family: 'Pridi', serif;">
+    <%- include('componentlogin/navbar.ejs') -%>
       <div class="container" style="padding-top: 10px ;margin-top: 10px;">
           <h1>เพิ่มกระทู้</h1><a href="/blog">ย้อนกลับ</a>
-            <form>
+            <form action="/blog/add/datainput" method="POST" enctype="multipart/form-data"> 
                 <div class="form-group">
                   <label for="exampleFormControlInput1">ชื่อ</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="ชื่อของกระทู้">
+                  <input type="text" class="form-control" id="inputname" name="inputname" placeholder="ชื่อของกระทู้" required>
                 </div>
                 <div class="form-group">
                   <label>รายละเอียด</label><br>
-                  <textarea name="editor1" rows="8" cols="80" class="form-control" ></textarea>
+                  <textarea name="inputeditor" rows="8" cols="80" class="form-control" id="inputeditor" required></textarea>
+                  <%#<input type="text" class="form-control" id="inputeditor" name="inputeditor" placeholder="ข้อมูลของกระทู้" required>%>
                 </div>
                 <div>
-                  <button type="button" class="btn btn-secondary btn-lg btn-block">เพิ่มกระทู้</button>
+                  <button type="submit" class="btn btn-secondary btn-lg btn-block">เพิ่มกระทู้</button>
                 </div>
-              </form>
-              
+            </form> 
       </div>
       <script>
-        CKEDITOR.replace( 'editor1' );
+        CKEDITOR.replace( 'inputeditor' );
       </script>
-  </body>
-</html>
+  </div>

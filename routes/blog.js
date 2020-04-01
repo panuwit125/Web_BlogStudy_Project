@@ -3,15 +3,55 @@ const fs = require('fs');
 module.exports = {
   blogRouterPage: (req,res) => {
     if (req.session.loggedin) {
+      let query = "SELECT * FROM blog_studentandteacher"
+      db.query(query,(err,result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        res.render('blog.ejs',{
+          results: req.session.loggedin,
+          name: req.session.username[0].Username,
+          money: req.session.username[0].Money,
+          resultblog: result
+        });
+      });
+      
+    } else {
       res.render('blog.ejs',{
+        results:""
+      });
+    }
+  },
+  addblogPage: (req,res) => {
+    if (req.session.loggedin) {
+      res.render('addblog.ejs',{
         results: req.session.loggedin,
         name: req.session.username[0].Username,
         money: req.session.username[0].Money
       });
     } else {
-      res.render('blog.ejs',{
-        results:""
-      });
+      redirect('/blog')
+    }
+  },
+  addblogdata: (req,res) => {
+    let message = "";
+    let name = req.body.inputname;
+    let description = req.body.inputeditor;
+    if (name && description) {
+      let query = "SELECT * FROM blog_studentandteacher WHERE NameBlog = '"+ name +"'";
+      db.query(query,(err,result) => {
+        if (result.length > 0) {
+          message = "Name is not avalable";
+        } else {
+          let queryinsert = "INSERT INTO blog_studentandteacher (IDStudentOrTeacher,NameBlog,Description) VALUES ('"+ req.session.username[0].Username +"','"+ name +"','"+ description +"')";
+          db.query(queryinsert,(err,result) => {
+            if (err) {
+              return res.status(500).send(err);
+            }
+            res.redirect('/blog');
+          });
+        }
+      })
     }
   }
 }

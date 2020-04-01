@@ -7,23 +7,23 @@ const path = require('path');
 var port=process.env.PORT || 3000;
 const app = express();
 const {indexRouterPage} = require('./routes/index');
-const {blogRouterPage} = require('./routes/blog');
+const {blogRouterPage,addblogPage,addblogdata} = require('./routes/blog');
 const {loginRouterPage,regisRouter,logRouter} = require('./routes/login');
 //const port = 3000;
 
-const db = mysql.createConnection({
+/*const db = mysql.createConnection({
     host: 'us-cdbr-iron-east-01.cleardb.net',
     user: 'b782c7fb7f73e1',
     password: '248d905b',
     database: 'heroku_89925aedaf7b102'
-});
+});*/
 
-/*const db = mysql.createConnection({
+const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'webblogDB'
-});*/
+});
 
 db.connect((err => {
     if (err) {
@@ -51,6 +51,8 @@ app.use(fileUpload());
 
 app.get('/',indexRouterPage);
 app.get('/blog', blogRouterPage);
+app.get('/blog/add',addblogPage);
+app.post('/blog/add/datainput',addblogdata);
 app.get('/login', loginRouterPage);
 app.post('/login/regis', regisRouter);
 app.post('/login/log', logRouter);

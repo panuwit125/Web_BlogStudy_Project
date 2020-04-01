@@ -1,11 +1,60 @@
 <% if (results) { %>
   <%- include('componentlogin/navbar.ejs') -%>
+  <% if (resultblog.length > 0) { %>
     <div class="container">
+      <table class="table table-hovered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% resultblog.forEach((blog,index) => { %>
+            <tr>
+              <th scope="row"><%= blog.NameBlog %></th>
+              <th><%= blog.IDStudentOrTeacher %></th>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
       <a href="/blog/add">+ AddBlog</a>
     </div>
+  <% } else { %>
+    <div class="container">
+      <p>No Blog</p>
+      <a href="/blog/add">+ AddBlog</a>
+    </div>
+  <% } %>
+    
+
+
 <% } else { %>
     <%- include('component/navbar.ejs') -%>
-    <div class="container">
-      <a href="/blog/add">+ AddBlog</a>
-    </div>
+    <% if (resultblog.length > 0) { %>
+      <div class="container">
+        <table class="table table-hovered">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Author</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% resultblog.forEach((blog,index) => { %>
+              <tr>
+                <th scope="row"><%= blog.NameBlog %></th>
+                <th><%= blog.IDStudentOrTeacher %></th>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+        <a href="/blog/">+ AddBlog</a>
+      </div>
+    <% } else { %>
+      <div class="container">
+        <p>No Blog</p>
+        <a href="/blog/">+ AddBlog</a>
+      </div>
+    <% } %>
 <% } %>
