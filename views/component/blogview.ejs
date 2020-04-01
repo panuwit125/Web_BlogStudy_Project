@@ -1,8 +1,35 @@
-<div class="container" style="margin-top: 5%;">
-    <div style="border: 2px solid black;padding: 10px;">
+<div class="container" style="margin-top: 20px;">
+    <div style="border-bottom: 2px solid black;padding: 10px;">
          <h2><%= idblog[0].NameBlog %></h2>
     </div>
-    <div style="border: 2px solid black;padding: 10px;margin-top: 10px;">
+    <div style="border-bottom: 2px solid black;padding: 10px;margin-top: 10px;">
         <%- idblog[0].Description %>
     </div>
+    <h4 style="margin-top: 10px;">Comment</h4>
+    <% if (token) { %>
+        <form action="/blog/<%= idcm %>" method="POST" enctype="multipart/form-data" >
+            <div class="form-group">
+                <textarea rows="4" cols="80" class="form-control" name="textareacomment">แสดงความคิดเห็นที่นี้</textarea> 
+            </div>
+            <button class="btn btn-dark">ยืนยัน</button>
+        </form>
+    <% } else { %>
+        <form>
+            <div class="form-group">
+            <textarea rows="4" cols="80" class="form-control">แสดงความคิดเห็นที่นี้</textarea> 
+            </div>
+            <button class="btn btn-dark">กรุณาเข้าสู่ระบบ</button>
+        </form>
+    <% } %>
+    <% if (comment.length > 0) { %>
+        <ol class="a">
+        <% comment.forEach((cm,index) => { %>
+            <li><%= cm.Comment %></li>
+        <% }); %>
+        </ol>
+    <% } else { %>
+       <div style="border-top: 2px solid black;padding-top: 10px;">
+            <h5>ไม่มีการแสดงความคิดเห็น</h5>
+        </div> 
+    <% } %>
 </div>

@@ -69,13 +69,46 @@ module.exports = {
         return res.status(500).send(err);
       }
       if (result.length > 0) {
-        res.render('viewblog.ejs',{
-          idblog: result
+        let cmquery = "SELECT * FROM comment_blog WHERE IDBlogStudent = "+ blogid +"";
+        db.query(cmquery,(err,results) => {
+            if (req.session.loggedin){
+              res.render('viewblog.ejs',{
+                idcm: blogid,
+                idblog: result,
+                token: req.session.loggedin,
+                name: req.session.username[0].Username,
+                money: req.session.username[0].Money,
+                comment: results
+            }); 
+            } else {
+              res.render('viewblog.ejs',{
+                idblog: result,
+                comment: results,
+                token: ""
+              }); 
+            }
         });
       } else {
         res.redirect('/')
       }
     });
-    
+  },
+  commentblog: (req,res) => {
+    let cmtext = req.body.textareacomment;
+    let blogid = req.params.id;
+    let query = "SELECT * FROM blog_studentandteacher WHERE IDBlogStudent = '"+ blogid +"'";
+    db.query(query,(err,result) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      if (result.length > 0) {
+        let querysave = "INSERT INTO comment_blog (IDBlogStudent,Comment) VALUES ("+ blogid +",'"+ cmtext +"')";
+        db.query(querysave,(err,result) => {
+          res.redirect('/blog/'+blogid);
+        });
+      } else {
+        res.send('err'+blogid)
+      }
+    });
   }
 }

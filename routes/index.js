@@ -23,15 +23,11 @@ module.exports = {
         if (err) {
           return res.status(500).send(err);
         }
-        //var bloghtml = result[0].Description;
-        //var bloghtml_text = bloghtml.toH
         res.render('index.ejs',{
-          //blogHtml: bloghtml,
           resultblog: result,
           results:""
         });
       });
     }
-    //res.end();
   }
 }

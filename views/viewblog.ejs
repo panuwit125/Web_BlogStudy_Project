@@ -1,2 +1,8 @@
-<%- include("component/navbar") %>
-<%- include("component/blogview.ejs") %>
+<% if (token) { %>
+    <%- include("componentlogin/navbar") %>
+    <%- include("component/blogview.ejs") %> 
+<% } else { %>
+   <%- include("component/navbar") %>
+    <%- include("component/blogview.ejs") %> 
+<% } %>
+
