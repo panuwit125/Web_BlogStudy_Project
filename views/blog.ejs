@@ -1,5 +1,6 @@
 <% if (results) { %>
   <%- include('componentlogin/navbar.ejs') -%>
+  <br>
   <% if (resultblog.length > 0) { %>
     <div class="container">
       <table class="table table-hovered">
@@ -31,6 +32,7 @@
 
 <% } else { %>
     <%- include('component/navbar.ejs') -%>
+    <br>
     <% if (resultblog.length > 0) { %>
       <div class="container">
         <table class="table table-hovered">

@@ -3,7 +3,7 @@ const fs = require('fs');
 module.exports = {
   blogRouterPage: (req,res) => {
     if (req.session.loggedin) {
-      let query = "SELECT * FROM blog_studentandteacher"
+      let query = "SELECT * FROM blog_studentandteacher";
       db.query(query,(err,result) => {
         if (err) {
           return res.status(500).send(err);
@@ -17,8 +17,15 @@ module.exports = {
       });
       
     } else {
-      res.render('blog.ejs',{
-        results:""
+      let query = "SELECT * FROM blog_studentandteacher";
+      db.query(query,(err,result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        res.render('blog.ejs',{
+          results:"",
+          resultblog:result
+        });
       });
     }
   },
@@ -51,7 +58,24 @@ module.exports = {
             res.redirect('/blog');
           });
         }
-      })
+      });
     }
+  },
+  viewblogPage: (req,res) => {
+    let blogid = req.params.id;
+    let query = "SELECT * FROM blog_studentandteacher WHERE IDBlogStudent = '"+ blogid +"'";
+    db.query(query,(err,result) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      if (result.length > 0) {
+        res.render('viewblog.ejs',{
+          idblog: result
+        });
+      } else {
+        res.redirect('/')
+      }
+    });
+    
   }
 }

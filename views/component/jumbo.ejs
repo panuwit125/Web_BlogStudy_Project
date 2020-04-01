@@ -15,11 +15,16 @@
             <div class="row" style="margin-top: 5px;">
                 <div class="col-sm-6">
                     <h4>ประกาศจากทางเว็บไซต์</h4>
+                    <% if (resultblog.length > 0) { %>
                     <ol class="a">
-                        <li>บทความ 1</li>
-                        <li>บทความ 2</li>
-                        <li>บทความ 3</li>
+                        <% resultblog.forEach((blog,index) => { %>
+                            <a href="/blog/<%= blog.IDBlogStudent %>"><li  ><%= blog.NameBlog %></li></a>
+                        <% }); %>
                     </ol>
+                    <% } else { %>
+                        <p>ไม่มีกระทู้</p>
+                    <% } %>
+                    
                 </div>
                 <div class="col-sm-6">
                     <h4>กระทู้จากสมาชิก</h4>

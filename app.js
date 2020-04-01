@@ -7,7 +7,7 @@ const path = require('path');
 var port=process.env.PORT || 3000;
 const app = express();
 const {indexRouterPage} = require('./routes/index');
-const {blogRouterPage,addblogPage,addblogdata} = require('./routes/blog');
+const {blogRouterPage,addblogPage,addblogdata,viewblogPage} = require('./routes/blog');
 const {loginRouterPage,regisRouter,logRouter} = require('./routes/login');
 //const port = 3000;
 
@@ -52,6 +52,7 @@ app.use(fileUpload());
 app.get('/',indexRouterPage);
 app.get('/blog', blogRouterPage);
 app.get('/blog/add',addblogPage);
+app.get('/blog/:id',viewblogPage);
 app.post('/blog/add/datainput',addblogdata);
 app.get('/login', loginRouterPage);
 app.post('/login/regis', regisRouter);
