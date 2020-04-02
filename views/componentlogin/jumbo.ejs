@@ -27,11 +27,15 @@
                 </div>
                 <div class="col-sm-6">
                     <h4>ประกาศจากทางเว็บไซต์</h4>
-                    <ol class="a">
-                        <li>กระทู้ 1</li>
-                        <li>กระทู้ 2</li>
-                        <li>กระทู้ 3</li>
-                    </ol>
+                    <% if (resultblogadmin.length > 0) { %>
+                    <ol class="a"></ol>
+                        <% resultblogadmin.forEach((blogadmin,index) => { %>
+                            <a href="#" ><li><%= blogadmin.NameBlog %></li></a>
+                        <% }); %>    
+                    </ol>    
+                    <% } else { %>
+                        <p>ไม่มีกระทู้</p>
+                    <% } %>
                 </div>
             </div>
             <div style="text-align: center;margin-top: 10px;">
