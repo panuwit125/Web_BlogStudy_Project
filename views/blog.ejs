@@ -13,7 +13,7 @@
         <tbody>
           <% resultblog.forEach((blog,index) => { %>
             <tr>
-              <th scope="row"><%= blog.NameBlog %></th>
+              <th scope="row"><a href="/blog/<%= blog.IDBlogStudent %>"><%= blog.NameBlog %></a></th>
               <th><%= blog.IDStudentOrTeacher %></th>
             </tr>
           <% }); %>
@@ -45,7 +45,7 @@
           <tbody>
             <% resultblog.forEach((blog,index) => { %>
               <tr>
-                <th scope="row"><%= blog.NameBlog %></th>
+                <th scope="row"><a href="/blog/<%= blog.IDBlogStudent %>"><%= blog.NameBlog %></a></th>
                 <th><%= blog.IDStudentOrTeacher %></th>
               </tr>
             <% }); %>

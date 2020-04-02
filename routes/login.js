@@ -71,5 +71,8 @@ module.exports = {
           res.end();
         }
       }
+    },logoutRouter: (req,res) => {
+      req.session.loggedin = false;
+      res.redirect('/');
     }
 }
