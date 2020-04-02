@@ -22,13 +22,16 @@
         </form>
     <% } %>
     <% if (comment.length > 0) { %>
+        <h3>ความคิดเห็น</h3>
         <ol class="a">
         <% comment.forEach((cm,index) => { %>
-            <li><%= cm.Comment %></li>
+            <div style="border: 2px solid black;padding: 20px;margin-bottom: 15px;">
+              <h4><li><%= cm.Comment %></li></h4>
+            </div>
         <% }); %>
         </ol>
     <% } else { %>
-       <div style="border-top: 2px solid black;padding-top: 10px;">
+       <div style="border: 2px solid black;">
             <h5>ไม่มีการแสดงความคิดเห็น</h5>
         </div> 
     <% } %>
