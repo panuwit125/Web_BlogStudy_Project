@@ -9,6 +9,7 @@ const app = express();
 const {indexRouterPage} = require('./routes/index');
 const {blogRouterPage,addblogPage,addblogdata,viewblogPage,commentblog} = require('./routes/blog');
 const {loginRouterPage,regisRouter,logRouter,logoutRouter} = require('./routes/login');
+const {adminRouterPage} = require('./routes/admin');
 //const port = 3000;
 
 /*const db = mysql.createConnection({
@@ -59,6 +60,7 @@ app.get('/login', loginRouterPage);
 app.post('/login/regis', regisRouter);
 app.post('/login/log', logRouter);
 app.get('/login/logout',logoutRouter);
+app.get('/admin',adminRouterPage);
 
 app.listen(port,()=> {
     console.log('Server Running')
