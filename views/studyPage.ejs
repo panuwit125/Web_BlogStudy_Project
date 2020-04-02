@@ -1,15 +1,29 @@
-<% include('component/navbar'); %>
-<div> <!--สร้าง classroom สำหรับครู-->
-    <a href="#">สร้างห้องเรียน</a>
-</div>
+<% if (token)
+<%- include('component/navbar'); -%>
+<div class="container">
+    <div> <!--สร้าง classroom สำหรับครู-->
+        <a href="/study/addstudy">สร้างห้องเรียน</a>
+    </div>
 
-<div>
-    <table>
-        <thead>
-
-        </thead>
-        <tbody>
-            
-        </tbody>
-    </table>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ห้องเรียน</th>
+                    <th>จำนวนคน</th>  
+                </tr>
+                
+            </thead>
+            <tbody>
+                <tr>
+                    <th>คณิตศาสตร์</th>
+                    <th>5</th> 
+                </tr>
+                <tr>
+                    <th>ภาษาไทย</th>
+                    <th>10</th> 
+                </tr>  
+            </tbody>
+        </table>
+    </div>
 </div>
