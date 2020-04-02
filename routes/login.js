@@ -53,6 +53,7 @@ module.exports = {
                 if (result.length > 0) {
                   req.session.loggedin = true;
                   req.session.username = result;
+                  req.session.typelogperson = typelogperson;
                   res.redirect('/');
                 } else {
                   res.send('Incorrect Username and/or Password'+ result + logquery);
@@ -70,6 +71,7 @@ module.exports = {
                 if (result.length > 0) {
                   req.session.loggedin = true;
                   req.session.username = result;
+                  req.session.typelogperson = typelogperson;
                   res.redirect('/');
                 } else {
                   res.send('Incorrect Username and/or Password'+ result + logquery);

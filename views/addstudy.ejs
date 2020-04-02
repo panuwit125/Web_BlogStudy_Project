@@ -1,8 +1,8 @@
 <%- include('component/navbar'); -%>
 <div class="container">
-    <form>
+    <form action="/study/addstudy" method="POST" enctype="multipart/form-data">
         <label>ชื่อวิชาที่จะสอน</label>
-        <input placeholder="ชื่อวิชา" required>
+        <input placeholder="ชื่อวิชา" required name="namestudy">
         <button type="submit">เปิดวิชา</button>
     </form>
 </div>

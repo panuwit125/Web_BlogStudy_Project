@@ -1,10 +1,28 @@
-<% if (token)
+<% if (token) { %>
+    
+<%- include('componentlogin/navbar'); -%>
+
+<% } else { %>
+
 <%- include('component/navbar'); -%>
+
+<% } %>
 <div class="container">
     <div> <!--สร้าง classroom สำหรับครู-->
-        <a href="/study/addstudy">สร้างห้องเรียน</a>
+        <% if (token) { %>
+
+            <% if (typeperson == "Student") { %>
+                <h3>เลือกห้องเรียน</h3>
+            <% } else { %>
+                <a href="/study/addstudy">สร้างห้องเรียน</a>
+            <% } %>
+
+        <% } else { %>
+            <h3>เรียนพิเศษออนไลน์</h3>
+        <% } %>
     </div>
 
+    <% if (studyroom.length > 0) { %>
     <div>
         <table>
             <thead>
@@ -15,15 +33,16 @@
                 
             </thead>
             <tbody>
-                <tr>
-                    <th>คณิตศาสตร์</th>
-                    <th>5</th> 
-                </tr>
-                <tr>
-                    <th>ภาษาไทย</th>
-                    <th>10</th> 
+                <% studyroom.forEach((room,index) => { %>
+                  <tr>
+                    <th><%= room.NameClassroom %></th>
+                    <th style="text-align: center;">5</th> 
                 </tr>  
+                <% }); %>
             </tbody>
         </table>
     </div>
+    <% } else { %>
+        <h3>ไม่มีห้องเรียน</h3>
+    <% } %>
 </div>
