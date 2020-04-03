@@ -28,7 +28,9 @@ module.exports = {
         let token = req.session.loggedin;
         if (token) {
             res.render('addstudy.ejs',{
-                user: req.session.username
+                user: req.session.username,
+                name: req.session.username[0].Username,
+                money: req.session.username[0].Money
             });
         } else {
             req.session.loggedin = false;
@@ -58,5 +60,31 @@ module.exports = {
             req.session.loggedin = false;
             res.redirect('/study');
         }
+    },
+    viewStudyPage: (req,res) => {
+        let id = req.params.id;
+        let token = req.session.loggedin;
+        let queryStudy = "SELECT * FROM create_classroom WHERE IDRoom = "+ id +"";
+        db.query(queryStudy,(err,result) => {
+            if (err) {
+                return res.status(500).send(err)
+            }
+            if (result.length > 0) {
+                if (token) {
+                res.render('ViewStudyPage.ejs',{
+                    token: token,
+                    user: req.session.username,
+                    classroom: result
+                });
+                } else {
+                    res.render('ViewStudyPage.ejs',{
+                        token: "",
+                        classroom: result
+                    });
+                }
+            } else {
+                res.send('err not found Page');
+            }
+        });
     }
 }

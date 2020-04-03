@@ -1,2 +1,10 @@
-<%- include("component/navbar.ejs") -%>
+<% if (token) { %>
+    <%- include("componentlogin/navbar.ejs") -%>
+<% } else { %>
+    <%- include("component/navbar.ejs") -%>
+<% } %>
+
+<h2><%= classroom[0].NameClassroom %></h>
+<h3>Description class</h3>
+<button>เข้าร่วมห้องเรียน</button>  
 

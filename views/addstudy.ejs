@@ -1,8 +1,25 @@
-<%- include('component/navbar'); -%>
-<div class="container">
-    <form action="/study/addstudy" method="POST" enctype="multipart/form-data">
-        <label>ชื่อวิชาที่จะสอน</label>
-        <input placeholder="ชื่อวิชา" required name="namestudy">
-        <button type="submit">เปิดวิชา</button>
-    </form>
-</div>
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+  <div style="font-family: 'Pridi', serif;">
+    <%- include('componentlogin/navbar.ejs') -%>
+      <div class="container" style="padding-top: 10px ;margin-top: 10px;">
+          <h1>เพิ่มกระทู้</h1><a href="/blog">ย้อนกลับ</a>
+            <form action="/study/addstudy" method="POST" enctype="multipart/form-data"> 
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">ชื่อ</label>
+                  <input type="text" class="form-control" id="inputname" name="namestudy" placeholder="ชื่อของกระทู้" required>
+                </div>
+                <div class="form-group">
+                  <label>รายละเอียด</label><br>
+                  <textarea name="inputeditor" rows="8" cols="80" class="form-control" id="inputeditor" required></textarea>
+                  <%#<input type="text" class="form-control" id="inputeditor" name="inputeditor" placeholder="ข้อมูลของกระทู้" required>%>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-secondary btn-lg btn-block">เพิ่มกระทู้</button>
+                </div>
+            </form> 
+      </div>
+      <script>
+        CKEDITOR.replace( 'inputeditor' );
+      </script>
+  </div>

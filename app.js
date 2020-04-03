@@ -10,7 +10,7 @@ const {indexRouterPage} = require('./routes/index');
 const {blogRouterPage,addblogPage,addblogdata,viewblogPage,commentblog} = require('./routes/blog');
 const {loginRouterPage,regisRouter,logRouter,logoutRouter} = require('./routes/login');
 const {adminRouterPage} = require('./routes/admin');
-const {studyRouterPage,addStudyPage,addStudy} = require('./routes/studyPage');
+const {studyRouterPage,addStudyPage,addStudy,viewStudyPage} = require('./routes/studyPage');
 //const port = 3000;
 
 /*const db = mysql.createConnection({
@@ -19,6 +19,14 @@ const {studyRouterPage,addStudyPage,addStudy} = require('./routes/studyPage');
     password: '248d905b',
     database: 'heroku_89925aedaf7b102'
 });*/
+
+/*const db = mysql.createConnection({
+    host: 'us-cdbr-iron-east-01.cleardb.net',
+    user: 'b782c7fb7f73e1',
+    password: '248d905b',
+    database: 'heroku_89925aedaf7b102'
+});*/
+
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -65,6 +73,7 @@ app.get('/admin',adminRouterPage);
 app.get('/study',studyRouterPage);
 app.get('/study/addstudy',addStudyPage);
 app.post('/study/addstudy',addStudy);
+app.get('/study/:id',viewStudyPage);
 
 app.listen(port,()=> {
     console.log('Server Running')

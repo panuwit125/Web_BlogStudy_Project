@@ -35,7 +35,7 @@
             <tbody>
                 <% studyroom.forEach((room,index) => { %>
                   <tr>
-                    <th><%= room.NameClassroom %></th>
+                    <th><a href="/study/<%= room.IDRoom %>"><%= room.NameClassroom %></a></th>
                     <th style="text-align: center;">5</th> 
                 </tr>  
                 <% }); %>
