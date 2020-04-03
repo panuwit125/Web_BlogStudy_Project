@@ -4,7 +4,17 @@
     <%- include("component/navbar.ejs") -%>
 <% } %>
 
-<h2><%= classroom[0].NameClassroom %></h>
-<h3>Description class</h3>
-<button>เข้าร่วมห้องเรียน</button>  
+<div class="container" style="font-family: 'Pridi', serif;">
+    <h1><%= classroom[0].NameClassroom %></h1>
+    <h4><%- classroom[0].DescriptionClass %></h4>
+    <form action="/study/<%= classroom[0].IDRoom %>" method="POST" enctype="multipart/form-data">
+        <% if (token) { %>
+            <button  type="submit" class="btn btn-dark btn-secondary  btn-block" >เข้าร่วมห้องเรียน</button>
+        <% } else { %>
+            <button  type="submit" class="btn btn-dark btn-secondary  btn-block" >กรุณาเข้าสู่ระบบ</button>
+        <% } %>
+    </form>
+</div>
+
+
 

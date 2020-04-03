@@ -39,6 +39,7 @@ module.exports = {
     },
     addStudy: (req,res) => {
         let namestudy = req.body.namestudy;
+        let description = req.body.inputeditor;
         let token = req.session.loggedin;
         let Idteacher = req.session.username;
         if (token) {
@@ -50,7 +51,7 @@ module.exports = {
                 if (result.length > 0) {
                     res.redirect('/study');
                 } else {
-                    let queryimport = "INSERT INTO create_classroom (IDTeacher,NameClassroom) VALUES ("+ Idteacher[0].IDTeacher +",'"+ namestudy +"')";
+                    let queryimport = "INSERT INTO create_classroom (IDTeacher,NameClassroom,DescriptionClass,NumberStudent) VALUES ("+ Idteacher[0].IDTeacher +",'"+ namestudy +"','"+ description +"',0)";
                     db.query(queryimport,(err,results) => {
                         res.redirect('/study');
                     });
@@ -71,11 +72,25 @@ module.exports = {
             }
             if (result.length > 0) {
                 if (token) {
-                res.render('ViewStudyPage.ejs',{
-                    token: token,
-                    user: req.session.username,
-                    classroom: result
-                });
+                    let typeperson = req.session.typelogperson;
+                    let IDStudent = req.session.username[0].IDStudent;
+                    if (typeperson == 'Student') {
+                        let querycheck ="SELECT * FROM study_inclassroom WHERE IDStudent = "+ IDStudent +" AND IDRoom = "+ id +" ";
+                        db.query(querycheck,(err,checkstudent) => {
+                            if (err) {
+                                return res.status(500).send(err);
+                            }
+                            res.render('ViewStudyPage.ejs',{
+                                token: token,
+                                user: req.session.username,
+                                classroom: result,
+                                name: req.session.username[0].Username,
+                                money: req.session.username[0].Money
+                            });
+                        });
+                    } else {
+                        res.send('คุณไม่ใช่นักเรียนโวยยย');
+                    }
                 } else {
                     res.render('ViewStudyPage.ejs',{
                         token: "",
@@ -86,5 +101,40 @@ module.exports = {
                 res.send('err not found Page');
             }
         });
+    },
+    joinclass: (req,res) => {
+        let token = req.session.loggedin;
+        let roomid = req.params.id;
+        let queryroom = "SELECT * FROM create_classroom WHERE IDRoom ="+ roomid +"";
+        if (token) {
+            let IDStudent = req.session.username[0].IDStudent;
+            db.query(queryroom,(err,result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                let querycheck = "SELECT * FROM study_inclassroom WHERE IDStudent="+ IDStudent +"";
+                db.query(querycheck,(err,resultcheck) => {
+                    if (err) {
+                        return res.status(500).send(err);
+                    }
+                    if (resultcheck.length > 0) {
+                        res.send("คุณเข้าห้องแล้ว");
+                    } else {
+                        let queryinsert = "INSERT INTO study_inclassroom (IDStudent,IDRoom) VALUES ("+ IDStudent +","+ roomid +")";
+                        db.query(queryinsert,(err,results) => {
+                            let queryupdate = "UPDATE create_classroom SET NumberStudent = NumberStudent + 1 WHERE IDRoom = "+ roomid +"";
+                            db.query(queryupdate,(err,updateresult) => {
+                                if (err) {
+                                    return res.status(500).send(err);
+                                }
+                                res.redirect('/study/'+roomid);
+                            })
+                        }); 
+                    }
+                })
+            });
+        } else {
+            res.send('กรุณาล็อคอิน');
+        }  
     }
 }
