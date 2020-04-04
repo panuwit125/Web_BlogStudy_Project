@@ -49,7 +49,7 @@ module.exports = {
           } else {
             if( typelogperson == 'Student') {
               if (username && password) {
-                let logquery = "SELECT * FROM Student WHERE Username = '"+ username +"' AND Password = '"+ password +"'";
+                let logquery = "SELECT * FROM student WHERE Username = '"+ username +"' AND Password = '"+ password +"'";
                 db.query(logquery,(err,result) => {
                   if (result.length > 0) {
                     req.session.loggedin = true;
@@ -67,7 +67,7 @@ module.exports = {
               }
             } else if ( typelogperson == 'Teacher') {
               if (username && password) {
-                let logquery = "SELECT * FROM Teacher WHERE Username = '"+ username +"' AND Password = '"+ password +"'";
+                let logquery = "SELECT * FROM teacher WHERE Username = '"+ username +"' AND Password = '"+ password +"'";
                 db.query(logquery,(err,result) => {
                   if (result.length > 0) {
                     req.session.loggedin = true;

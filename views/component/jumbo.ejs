@@ -1,8 +1,5 @@
-<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
 <link href="https://fonts.googleapis.com/css?family=Pridi&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="stylesheets/content.css">
-<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -18,62 +15,38 @@
         border-radius: 5px;
         width: auto;
     }
+    .boxmodel:hover {
+        opacity: 0.8;
+        border: 3px solid #223c50;
+        background-color: white;
+        border-radius: 5px;
+        width: auto;
+    }
     .boxmodel img {
         width: 100%;
         height: 400px;
     }
+    #tx:visited {
+        text-decoration: none;
+        color:white;
+    }
+    #tx:hover {
+        color:#85b9c5;
+        text-decoration: none;
+    }
+    #tx1:visited {
+        color:black;
+        text-decoration: none;
+    }
+    #tx1:hover {
+        color: black;
+        text-decoration: underline;
+        text-shadow: black;
+    }
 </style>
-<!--<div class="container">
-    <div class="row" style="margin-top: 5%; font-family: 'Pridi', serif;">
-        <div class="col-sm-9">
-            <h1>UPDATE เรื่องเรียน</h1>
-            <div style="border-bottom:5px solid gray">
-                <h3>กระทู้</h3>
-            </div>
-            <div class="row" style="margin-top: 5px;">
-                <div class="col-sm-6">
-                    <h4>กระทู้จากสมาชิก</h4>
-                    <% if (resultblog.length > 0) { %>
-                    <ol class="a">
-                        <% resultblog.forEach((blog,index) => { %>
-                            <a href="/blog/<%= blog.IDBlogStudent %>"><li  ><%= blog.NameBlog %></li></a>
-                        <% }); %>
-                    </ol>
-                    <% } else { %>
-                        <p>ไม่มีกระทู้</p>
-                    <% } %>
-                    
-                </div>
-                <div class="col-sm-6">
-                    <h4>ประกาศจากทางเว็บไซต์</h4>
-                    <% if (resultblogadmin.length > 0) { %>
-                    <ol class="a"></ol>
-                        <% resultblogadmin.forEach((blogadmin,index) => { %>
-                            <a href="#" ><li><%= blogadmin.NameBlog %></li></a>
-                        <% }); %>    
-                    </ol>    
-                    <% } else { %>
-                        <p>ไม่มีกระทู้</p>
-                    <% } %>
-                </div>
-            </div>
-            <div style="text-align: center;margin-top: 10px;">
-                <a href="/blog" class="btn btn-dark" >ดูเพิ่ม</a>
-                <a href="/login" class="btn btn-dark">+ตั้งกระทู้</a>
-            </div>
-        </div>
-        <div class="col-sm-3" >
-            <div class="leftcontent">
-                <h3>เรื่องแนะนำ</h3>
-                <h5 style="border-bottom: 2px solid black;">โปรแกรมสอนพิเศษ</h5>
-            </div>
-        </div>
-    </div>
-    
-</div>-->
 
  <!-- JUMBOTON -->
- <div class="jumbotron jumbotron-fluid" style="margin-top: 50px;">
+ <div class="jumbotron jumbotron-fluid" style="margin-top: 30px;">
     <div class="container">
       <h1 class="display-4">IN THE FUTURE</h1>
       <p class="lead">IS PROGRAMMER.</p>
@@ -90,14 +63,14 @@
                         <div >
                             <img src="https://lh3.googleusercontent.com/proxy/mC2xRTUanYDdm8Wld-jeVCwVbEU29uEwVDQXRp3ictKNIS7KgcJCSq_sNXzBTLSIrEwEocrgSaYLHIwRdsVX5sKTy9p5PxS6f33eVgsPcW9bD3ZhIBdonlfe" >
                         </div>
-                        <div style="color: black;text-align: left;margin: 10px;">
+                        <div  style="color: black;text-align: left;margin: 10px;">
                             <div class="row" style="margin-left: 20px;">
                                 <div class="col-1" style="text-align: center;">
                                     <h4>1</h4>
                                 </div>
                                 <div class="col-11">
                                     <% if(resultblog.length > 0) { %>
-                                        <a href="/blog/<%= resultblog[0].IDBlogStudent %>"><h4><%= resultblog[0].NameBlog %></h4></a>
+                                        <h4><a id="tx1" href="/blog/<%= resultblog[0].IDBlogStudent %>"><%= resultblog[0].NameBlog %></a></h4>
                                     <% } else { %>
                                         <h4>ไม่มีข้อมูล</h4>
                                     <% } %>
@@ -115,7 +88,7 @@
                                     </div>
                                     <div class="col-11">
                                         <% if(resultblog.length > 1) { %>
-                                            <a href="/blog/<%= resultblog[1].IDBlogStudent %>"><h4><%= resultblog[1].NameBlog %></h4></a>
+                                            <h4><a id="tx1" href="/blog/<%= resultblog[1].IDBlogStudent %>"><%= resultblog[1].NameBlog %></a></h4>
                                         <% } else { %>
                                             <h4>ไม่มีข้อมูล</h4>
                                         <% } %>
@@ -131,7 +104,7 @@
                                     </div>
                                     <div class="col-11">
                                         <% if(resultblog.length > 2) { %>
-                                            <a href="/blog/<%= resultblog[2].IDBlogStudent %>"><h4><%= resultblog[2].NameBlog %></h4></a>
+                                            <h4><a id="tx1" href="/blog/<%= resultblog[2].IDBlogStudent %>"><%= resultblog[2].NameBlog %></a></h4>
                                         <% } else { %>
                                             <h4>ไม่มีข้อมูล</h4>
                                         <% } %>
@@ -147,7 +120,7 @@
                                     </div>
                                     <div class="col-11">
                                         <% if(resultblog.length > 3) { %>
-                                            <a href="/blog/<%= resultblog[3].IDBlogStudent %>"><h4><%= resultblog[3].NameBlog %></h4></a>
+                                            <h4><a id="tx1" href="/blog/<%= resultblog[3].IDBlogStudent %>"><%= resultblog[3].NameBlog %></a></h4>
                                         <% } else { %>
                                             <h4>ไม่มีข้อมูล</h4>
                                         <% } %>
@@ -163,7 +136,7 @@
                                     </div>
                                     <div class="col-11">
                                         <% if(resultblog.length > 4) { %>
-                                            <a href="/blog/<%= resultblog[4].IDBlogStudent %>"><h4><%= resultblog[4].NameBlog %></h4></a>
+                                            <h4><a id="tx1" href="/blog/<%= resultblog[4].IDBlogStudent %>"><%= resultblog[4].NameBlog %></a></h4>
                                         <% } else { %>
                                             <h4>ไม่มีข้อมูล</h4>
                                         <% } %>
@@ -190,7 +163,7 @@
                 <div style="border-bottom: 1px solid #6b7d8b;margin: 10px;">
                     <div style="margin-left: 20px;">
                         <% if (resultclass.length > 0){ %>
-                            <a href="/study/<%= resultclass[0].IDRoom %>"><h6 style="font-size: 20px;"><%= resultclass[0].NameClassroom %></h6></a>
+                            <h6 style="font-size: 20px;"><a href="/study/<%= resultclass[0].IDRoom %>"  id="tx" ><%= resultclass[0].NameClassroom %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>
@@ -199,7 +172,7 @@
                 <div  style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;" >
                         <% if (resultclass.length > 1){ %>
-                            <a href="/study/<%= resultclass[1].IDRoom %>"><h6 style="font-size: 20px;"><%= resultclass[1].NameClassroom %></h6></a>
+                            <h6 style="font-size: 20px;" ><a href="/study/<%= resultclass[1].IDRoom %>" id="tx"><%= resultclass[1].NameClassroom %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>
@@ -208,7 +181,7 @@
                 <div style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;" >
                         <% if (resultclass.length > 2){ %>
-                            <a href="/study/<%= resultclass[2].IDRoom %>"><h6 style="font-size: 20px;"><%= resultclass[2].NameClassroom %></h6></a>
+                            <h6 style="font-size: 20px;"><a href="/study/<%= resultclass[2].IDRoom %>" id="tx"><%= resultclass[2].NameClassroom %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>
@@ -217,7 +190,7 @@
                 <div style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;">
                         <% if (resultclass.length > 3){ %>
-                            <a href="/study/<%= resultclass[3].IDRoom %>"><h6 style="font-size: 20px;"><%= resultclass[3].NameClassroom %></h6></a>
+                            <h6 style="font-size: 20px;"><a href="/study/<%= resultclass[3].IDRoom %>" id="tx"><%= resultclass[3].NameClassroom %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>
@@ -226,7 +199,7 @@
                 <div  style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;" >
                         <% if (resultclass.length > 4){ %>
-                            <a href="/study/<%= resultclass[4].IDRoom %>"><h6 style="font-size: 20px;"><%= resultclass[4].NameClassroom %></h6></a>
+                            <h6 style="font-size: 20px;"><a href="/study/<%= resultclass[4].IDRoom %>" id="tx"><%= resultclass[4].NameClassroom %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>  
@@ -235,7 +208,7 @@
                 <div style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;" >
                         <% if (resultclass.length > 5){ %>
-                            <a href="/study/<%= resultclass[5].IDRoom %>"><h6 style="font-size: 20px;"><%= resultclass[5].NameClassroom %></h6></a>
+                            <h6 style="font-size: 20px;"><a id="tx" href="/study/<%= resultclass[5].IDRoom %>"><%= resultclass[5].NameClassroom %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %> 
@@ -249,7 +222,7 @@
                             <h5>กระทู้มาใหม่</h5>
                         </div>
                     <div class="col" style="margin-top: 5px;margin-left: 2px;text-decoration: underline;text-align: right;margin-right: 10px;">
-                        <a href="/blog" style="text-decoration: none;color: white;"><h6>ดูทั้งหมด</h6></a>
+                        <a href="/blog" style="text-decoration: none;color: white;" ><h6>ดูทั้งหมด</h6></a>
                     </div>
                 </div>
             </div>
@@ -257,7 +230,7 @@
                 <div style="border-bottom: 1px solid #6b7d8b;margin: 10px;">
                     <div style="margin-left: 20px;">
                         <% if (resultblog.length > 0){ %>
-                            <a href="/study/<%= resultblog[0].IDBlogStudent %>"><h6 style="font-size: 20px;"><%= resultblog[0].NameBlog %></h6></a>
+                            <h6 style="font-size: 20px;"><a href="/blog/<%= resultblog[0].IDBlogStudent %>" id="tx"><%= resultblog[0].NameBlog %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %> 
@@ -266,7 +239,7 @@
                 <div  style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;" >
                         <% if (resultblog.length > 1){ %>
-                            <a href="/study/<%= resultblog[1].IDBlogStudent %>"><h6 style="font-size: 20px;"><%= resultblog[1].NameBlog %></h6></a>
+                            <h6 style="font-size: 20px;"><a id="tx" href="/blog/<%= resultblog[1].IDBlogStudent %>"><%= resultblog[1].NameBlog %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>  
@@ -275,7 +248,7 @@
                 <div style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;" >
                         <% if (resultblog.length > 2){ %>
-                            <a href="/study/<%= resultblog[2].IDBlogStudent %>"><h6 style="font-size: 20px;"><%= resultblog[2].NameBlog %></h6></a>
+                            <h6 style="font-size: 20px;"><a id="tx" href="/blog/<%= resultblog[2].IDBlogStudent %>"><%= resultblog[2].NameBlog %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>  
@@ -284,7 +257,7 @@
                 <div style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;">
                         <% if (resultblog.length > 3){ %>
-                            <a href="/study/<%= resultblog[3].IDBlogStudent %>"><h6 style="font-size: 20px;"><%= resultblog[3].NameBlog %></h6></a>
+                           <h6 style="font-size: 20px;"><a id="tx" href="/blog/<%= resultblog[3].IDBlogStudent %>"><%= resultblog[3].NameBlog %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %> 
@@ -293,7 +266,7 @@
                 <div  style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;" >
                         <% if (resultblog.length > 4){ %>
-                            <a href="/study/<%= resultblog[4].IDBlogStudent %>"><h6 style="font-size: 20px;"><%= resultblog[4].NameBlog %></h6></a>
+                            <h6 style="font-size: 20px;"><a id="tx" href="/blog/<%= resultblog[4].IDBlogStudent %>"><%= resultblog[4].NameBlog %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>    
@@ -302,7 +275,7 @@
                 <div style="border-bottom: 1px solid #6b7d8b;margin: 15px;">
                     <div style="margin-left: 20px;" >
                         <% if (resultblog.length > 5){ %>
-                            <a href="/study/<%= resultblog[5].IDBlogStudent %>"><h6 style="font-size: 20px;"><%= resultblog[5].NameBlog %></h6></a>
+                            <h6 style="font-size: 20px;"><a id="tx" href="/blog/<%= resultblog[5].IDBlogStudent %>"><%= resultblog[5].NameBlog %></a></h6>
                         <% } else { %>
                             <h6 style="font-size: 20px;">ไม่มีข้อมูล</h6>
                         <% } %>    
