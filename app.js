@@ -15,27 +15,20 @@ const {addCoursePage,addCourse} = require('./routes/addCourse');
 const {viewCourse} = require('./routes/viewCourse');
 //const port = 3000;
 
-/*const db = mysql.createConnection({
-    host: 'us-cdbr-iron-east-01.cleardb.net',
-    user: 'b782c7fb7f73e1',
-    password: '248d905b',
-    database: 'heroku_89925aedaf7b102'
-});*/
-
-/*const db = mysql.createConnection({
-    host: 'us-cdbr-iron-east-01.cleardb.net',
-    user: 'b782c7fb7f73e1',
-    password: '248d905b',
-    database: 'heroku_89925aedaf7b102'
-});*/
-
-
 const db = mysql.createConnection({
+    host: 'webtest.crhhwrqtzqbi.ap-southeast-1.rds.amazonaws.com',
+    port: '3306',
+    user: 'root',
+    password: 'panuwit055',
+    database: 'webblogdb'
+});
+
+/*const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'webblogDB'
-});
+});*/
 
 db.connect((err => {
     if (err) {
