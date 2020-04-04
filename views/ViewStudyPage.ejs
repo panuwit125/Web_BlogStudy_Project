@@ -15,13 +15,54 @@
             <% if ( typeperson == 'Student') { %>
 
                 <% if (check.length > 0) { %>
-                    <h3>คุณอยู่ในห้องเรียนแล้ว</h3>
+                    <h3>บทเรียน</h3>
+                    <div style="padding-top: 20px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>บทเรียน</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% course.forEach((course,index) => { %>
+                                <tr>
+                                    <th><%= course.NameCourse %></th>
+                                    <th><a href="/study/<%= classroom[0].IDRoom %>/<%= course.IDCourse %>">คลิกที่นี้</a></th>
+                                </tr>    
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
                 <% } else { %>
                     <button  type="submit" class="btn btn-dark btn-secondary  btn-block" >เข้าร่วมห้องเรียน</button>
                 <% } %>
 
             <% } else if ( typeperson == 'Teacher') { %>
-                <h3> สร้างบทเรียน </h3>
+                <% if (check.length > 0 ) { %>
+                    <h3> สร้างบทเรียน </h3>
+                    <a href="/study/<%= classroom[0].IDRoom %>/addcourse">เพิ่ม</a>
+                    <div style="padding-top: 20px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>บทเรียน</th>
+                                    <th> ลิงค์ </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% course.forEach((course,index) => { %>
+                                <tr>
+                                    <th><%= course.NameCourse %></th>
+                                    <th><a href="/study/<%= classroom[0].IDRoom %>/<%= course.IDCourse %>">คลิกที่นี้</a></th>
+                                </tr>    
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                <% } else { %>
+                    <h3>คุณเป็นครูไม่มีสิทธิ์เรียนจ่ะ</h3>
+                <% } %>
+                
             <% } else { %>
                 <% res.send('err'); %>
             <% } %>

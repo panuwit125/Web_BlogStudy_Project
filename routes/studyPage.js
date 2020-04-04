@@ -87,15 +87,23 @@ module.exports = {
                                 return res.status(500).send(err);
                             }
                             if (checkstudent.length > 0) {
-                                res.render('ViewStudyPage.ejs',{
-                                    token: token,
-                                    user: req.session.username,
-                                    classroom: result,
-                                    name: req.session.username[0].Username,
-                                    money: req.session.username[0].Money,
-                                    check: checkstudent,
-                                    typeperson: req.session.typelogperson
+                                let querycourse = "SELECT * FROM study_course WHERE IDRoom = "+ id +"";
+                                db.query(querycourse,(err,courseresult) => {
+                                    if (err) {
+                                        return res.status(500).send(err)
+                                    }
+                                    res.render('ViewStudyPage.ejs',{
+                                        token: token,
+                                        user: req.session.username,
+                                        classroom: result,
+                                        name: req.session.username[0].Username,
+                                        money: req.session.username[0].Money,
+                                        check: checkstudent,
+                                        typeperson: req.session.typelogperson,
+                                        course: courseresult
+                                    });
                                 });
+                                
                             } else {
                                 res.render('ViewStudyPage.ejs',{
                                     token: token,
@@ -109,14 +117,42 @@ module.exports = {
                             }
                         });
                     } else if (typeperson == 'Teacher') {
-                        res.render('ViewStudyPage.ejs',{
-                            token: token,
-                            user: req.session.username,
-                            classroom: result,
-                            name: req.session.username[0].Username,
-                            money: req.session.username[0].Money,
-                            typeperson: req.session.typelogperson
+                        let querycheck = "SELECT * FROM create_classroom WHERE IDRoom ="+ id +" AND IDTeacher = "+ req.session.username[0].IDTeacher +"";
+                        db.query(querycheck,(err,resultcheck) => {
+                            if (err) {
+                                return res.status(500).send(err)
+                            }
+                            if (resultcheck.length > 0) {
+                                let querycourse = "SELECT * FROM study_course WHERE IDRoom = "+ id +"";
+                                db.query(querycourse,(err,courseresult) => {
+                                    if (err) {
+                                        return res.status(500).send(err)
+                                    }
+                                    res.render('ViewStudyPage.ejs',{
+                                        token: token,
+                                        user: req.session.username,
+                                        classroom: result,
+                                        name: req.session.username[0].Username,
+                                        money: req.session.username[0].Money,
+                                        typeperson: req.session.typelogperson,
+                                        check: resultcheck,
+                                        course: courseresult
+                                    });
+                                });
+                            } else {
+                                res.render('ViewStudyPage.ejs',{
+                                    token: token,
+                                    user: req.session.username,
+                                    classroom: result,
+                                    name: req.session.username[0].Username,
+                                    money: req.session.username[0].Money,
+                                    typeperson: req.session.typelogperson,
+                                    check: resultcheck
+                                });
+                            }
                         });
+                        
+                        
                     } else {
                         req.session.loggedin = false;
                         //res.redirect('/study');

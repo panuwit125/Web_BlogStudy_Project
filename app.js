@@ -12,6 +12,7 @@ const {loginRouterPage,regisRouter,logRouter,logoutRouter} = require('./routes/l
 const {adminRouterPage} = require('./routes/admin');
 const {studyRouterPage,addStudyPage,addStudy,viewStudyPage,joinclass} = require('./routes/studyPage');
 const {addCoursePage,addCourse} = require('./routes/addCourse');
+const {viewCourse} = require('./routes/viewCourse');
 //const port = 3000;
 
 /*const db = mysql.createConnection({
@@ -79,6 +80,8 @@ app.post('/study/:id',joinclass);
 
 app.get('/study/:id/addcourse',addCoursePage);
 app.post('/study/:id/addcourse',addCourse);
+
+app.get('/study/:id/:idcourse',viewCourse);
 
 app.listen(port,()=> {
     console.log('Server Running')
