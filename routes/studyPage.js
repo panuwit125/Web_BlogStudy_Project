@@ -7,17 +7,23 @@ module.exports = {
                 return res.status(500).send(err)
             }
             if (token) {
-                res.render('studyPage.ejs',{
-                    token: req.session.loggedin,
-                    studyroom: result,
-                    user: req.session.username,
-                    typeperson: req.session.typelogperson,
-                    name: req.session.username[0].Username,
-                    money: req.session.username[0].Money
-                });
-                
+                if (req.session.typelogperson.length > 0) {
+                    res.render('studyPage.ejs',{
+                        token: req.session.loggedin,
+                        studyroom: result,
+                        user: req.session.username,
+                        typeperson: req.session.typelogperson,
+                        name: req.session.username[0].Username,
+                        money: req.session.username[0].Money
+                    });
+                } else {
+                    req.session.loggedin = false;
+                    res.send('แอบอ้าง')
+                    //res.redirect('/study');
+                } 
             } else {
                 res.render('studyPage.ejs',{
+                    typeperson: "",
                     token: "",
                     studyroom: result
                 });
@@ -80,21 +86,48 @@ module.exports = {
                             if (err) {
                                 return res.status(500).send(err);
                             }
-                            res.render('ViewStudyPage.ejs',{
-                                token: token,
-                                user: req.session.username,
-                                classroom: result,
-                                name: req.session.username[0].Username,
-                                money: req.session.username[0].Money
-                            });
+                            if (checkstudent.length > 0) {
+                                res.render('ViewStudyPage.ejs',{
+                                    token: token,
+                                    user: req.session.username,
+                                    classroom: result,
+                                    name: req.session.username[0].Username,
+                                    money: req.session.username[0].Money,
+                                    check: checkstudent,
+                                    typeperson: req.session.typelogperson
+                                });
+                            } else {
+                                res.render('ViewStudyPage.ejs',{
+                                    token: token,
+                                    user: req.session.username,
+                                    classroom: result,
+                                    name: req.session.username[0].Username,
+                                    money: req.session.username[0].Money,
+                                    check: checkstudent,
+                                    typeperson: req.session.typelogperson
+                                });
+                            }
+                        });
+                    } else if (typeperson == 'Teacher') {
+                        res.render('ViewStudyPage.ejs',{
+                            token: token,
+                            user: req.session.username,
+                            classroom: result,
+                            name: req.session.username[0].Username,
+                            money: req.session.username[0].Money,
+                            typeperson: req.session.typelogperson
                         });
                     } else {
+                        req.session.loggedin = false;
+                        //res.redirect('/study');
                         res.send('คุณไม่ใช่นักเรียนโวยยย');
                     }
                 } else {
+                    req.session.loggedin = false;
                     res.render('ViewStudyPage.ejs',{
                         token: "",
-                        classroom: result
+                        classroom: result,
+                        typeperson: ""
                     });
                 }
             } else {

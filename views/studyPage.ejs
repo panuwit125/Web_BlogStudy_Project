@@ -13,8 +13,10 @@
 
             <% if (typeperson == "Student") { %>
                 <h3>เลือกห้องเรียน</h3>
-            <% } else { %>
+            <% } else if ( typeperson == "Teacher"){ %>
                 <a href="/study/addstudy">สร้างห้องเรียน</a>
+            <% } else { %>
+                <% res.send('err'); %>
             <% } %>
 
         <% } else { %>

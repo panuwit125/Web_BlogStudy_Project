@@ -35,56 +35,63 @@ module.exports = {
       let username = req.body.user_login;
       let password = req.body.pass_login;
       let typelogperson = req.body.typelogperson;
-      //Check Admin Before Check Other Person
-      let queryadmin = "SELECT * FROM staff WHERE Username='"+ username +"' and Password ='"+ password +"'";
-      db.query(queryadmin,(err,adminresult) => {
-        if(err) {
-          return res.status(500).send(err);
-        }
-        if (adminresult.length > 0) {
-          req.session.loggedin = true;
-          req.session.username = adminresult;
-          res.redirect('/admin');
-        } else {
-          if( typelogperson == 'Student') {
-            if (username && password) {
-              let logquery = "SELECT * FROM Student WHERE Username = '"+ username +"' AND Password = '"+ password +"'";
-              db.query(logquery,(err,result) => {
-                if (result.length > 0) {
-                  req.session.loggedin = true;
-                  req.session.username = result;
-                  req.session.typelogperson = typelogperson;
-                  res.redirect('/');
-                } else {
-                  res.send('Incorrect Username and/or Password'+ result + logquery);
-                }
-                res.end();
-              });
-            } else {
-              res.send('Please enter Username and Password');
-              res.end();
-            }
+      if (username && password && typelogperson){
+        //Check Admin Before Check Other Person
+        let queryadmin = "SELECT * FROM staff WHERE Username='"+ username +"' and Password ='"+ password +"'";
+        db.query(queryadmin,(err,adminresult) => {
+          if(err) {
+            return res.status(500).send(err);
+          }
+          if (adminresult.length > 0) {
+            req.session.loggedin = true;
+            req.session.username = adminresult;
+            res.redirect('/admin');
           } else {
-            if (username && password) {
-              let logquery = "SELECT * FROM Teacher WHERE Username = '"+ username +"' AND Password = '"+ password +"'";
-              db.query(logquery,(err,result) => {
-                if (result.length > 0) {
-                  req.session.loggedin = true;
-                  req.session.username = result;
-                  req.session.typelogperson = typelogperson;
-                  res.redirect('/');
-                } else {
-                  res.send('Incorrect Username and/or Password'+ result + logquery);
-                }
+            if( typelogperson == 'Student') {
+              if (username && password) {
+                let logquery = "SELECT * FROM Student WHERE Username = '"+ username +"' AND Password = '"+ password +"'";
+                db.query(logquery,(err,result) => {
+                  if (result.length > 0) {
+                    req.session.loggedin = true;
+                    req.session.username = result;
+                    req.session.typelogperson = typelogperson;
+                    res.redirect('/');
+                  } else {
+                    res.send('Incorrect Username and/or Password'+ result + logquery);
+                  }
+                  res.end();
+                });
+              } else {
+                res.send('Please enter Username and Password');
                 res.end();
-              });
+              }
+            } else if ( typelogperson == 'Teacher') {
+              if (username && password) {
+                let logquery = "SELECT * FROM Teacher WHERE Username = '"+ username +"' AND Password = '"+ password +"'";
+                db.query(logquery,(err,result) => {
+                  if (result.length > 0) {
+                    req.session.loggedin = true;
+                    req.session.username = result;
+                    req.session.typelogperson = typelogperson;
+                    res.redirect('/');
+                  } else {
+                    res.send('Incorrect Username and/or Password'+ result + logquery);
+                  }
+                  res.end();
+                });
+              } else {
+                res.send('Please enter Username and Password');
+                res.end();
+              }
             } else {
-              res.send('Please enter Username and Password');
-              res.end();
+              res.send('กรุณากรอกด้วยบักหรรม');
             }
-          }
-          }
-        });
+            }
+          });
+      } else {
+        res.send('กรุณากรอกให้ครบ');
+      }
+      
     },logoutRouter: (req,res) => {
       req.session.loggedin = false;
       res.redirect('/');

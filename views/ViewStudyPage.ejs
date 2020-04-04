@@ -6,10 +6,27 @@
 
 <div class="container" style="font-family: 'Pridi', serif;">
     <h1><%= classroom[0].NameClassroom %></h1>
-    <h4><%- classroom[0].DescriptionClass %></h4>
+    <h4 style="margin-bottom: 20px;"><%- classroom[0].DescriptionClass %></h4>
     <form action="/study/<%= classroom[0].IDRoom %>" method="POST" enctype="multipart/form-data">
+
+
         <% if (token) { %>
-            <button  type="submit" class="btn btn-dark btn-secondary  btn-block" >เข้าร่วมห้องเรียน</button>
+
+            <% if ( typeperson == 'Student') { %>
+
+                <% if (check.length > 0) { %>
+                    <h3>คุณอยู่ในห้องเรียนแล้ว</h3>
+                <% } else { %>
+                    <button  type="submit" class="btn btn-dark btn-secondary  btn-block" >เข้าร่วมห้องเรียน</button>
+                <% } %>
+
+            <% } else if ( typeperson == 'Teacher') { %>
+                <h3> สร้างบทเรียน </h3>
+            <% } else { %>
+                <% res.send('err'); %>
+            <% } %>
+            
+            
         <% } else { %>
             <button  type="submit" class="btn btn-dark btn-secondary  btn-block" >กรุณาเข้าสู่ระบบ</button>
         <% } %>
