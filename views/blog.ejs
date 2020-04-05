@@ -37,31 +37,75 @@
   <%- include('componentlogin/navbar.ejs') -%>
   <br>
   <% if (resultblog.length > 0) { %>
-    <div class="container">
-      <table class="table table-hovered">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Author</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% resultblog.forEach((blog,index) => { %>
-            <tr>
-              <th scope="row"><a href="/blog/<%= blog.IDBlogStudent %>"><%= blog.NameBlog %></a></th>
-              <th><%= blog.IDStudentOrTeacher %></th>
-            </tr>
-          <% }); %>
-        </tbody>
-      </table>
-      <a href="/blog/add">+ AddBlog</a>
+    <!-- LIST TABLE -->
+    <div class="container" style="margin-top: 70px;font-family: 'Pridi', serif;">
+      <div class="row">
+        <div class="col-9" >
+          <!-- THEAD-->
+          <div class="boxmodel2"style="margin-left: 40px;">
+            <div class="row" style="text-align: center;border-bottom: 3px solid #6c8395;margin: 20px;color: white;">
+              <div class="col-6">
+                <h4>บทความ</h4>
+              </div>
+              <div class="col-4">
+                <h4>ผู้เขียน</h4>
+              </div>
+              <div class="col-2">
+                <h5>จำนวนเข้าดู</h5>
+              </div>
+            </div>
+            <!-- TBODY -->
+            <% resultblog.forEach((blog,index) => { %>
+            <div class="row"  style="text-align: center;border-bottom: 1px solid #6c8395;margin: 20px;">
+              <div class="col-6">
+               <p><a class="tx" href="/blog/<%= blog.IDBlogStudent %>"><%= blog.NameBlog %></a></p>
+              </div>
+              <div class="col-4">
+                <p class="tx"><%= blog.IDStudentOrTeacher %></p>
+              </div>
+              <div class="col-2">
+                <p class="tx">1203</p>
+              </div>
+            </div>
+            <% }); %>
+            <!-- END TBODY-->
+          </div>
+        </div>
+        <div class="col-3" style="text-align: center;">
+          <a type="button" class="btn" id="buttoncreate" href="/blog/add">สร้างกระทู้</a>
+        </div>
+      </div>
     </div>
+    <!-- END LIST TABLE -->
   <% } else { %>
-    <div class="container">
-      <p>No Blog</p>
-      <a href="/blog/add">+ AddBlog</a>
+    <div class="container" style="margin-top: 100px;font-family: 'Pridi', serif;">
+      <div class="row">
+        <div class="col-9">
+          <!-- THEAD-->
+          <div class="boxmodel2" style="color: white;">
+            <div class="row" style="text-align: center;border-bottom: 3px solid #6c8395;margin: 20px;">
+              <div class="col-6">
+                <h4>บทความ</h4>
+              </div>
+              <div class="col-4">
+                <h4>ผู้เขียน</h4>
+              </div>
+              <div class="col-2">
+                <h5>จำนวนเข้าดู</h5>
+              </div>
+            </div>
+            <!-- TBODY -->
+            <h5>ไม่มีบทความ</h5>
+            <!-- END TBODY-->
+          </div>
+        </div>
+        <div class="col-3" style="text-align: center;">
+          <a id="buttoncreate" href="/blog/add" >สร้างกระทู้</a>
+        </div>
+      </div>
     </div>
   <% } %>
+
     
 
 
@@ -132,7 +176,7 @@
             </div>
           </div>
           <div class="col-3" style="text-align: center;">
-            <a id="buttoncreate" href="/blog/" >สร้างกระทู้</a>
+            <button type="button" class="btn" id="buttoncreate" data-toggle="popover" title="กรุณาเข้าสู่ระบบ" data-content="ถึงจะสามารถสร้างกระทู้ได้">สร้างกระทู้</button>
           </div>
         </div>
       </div>
