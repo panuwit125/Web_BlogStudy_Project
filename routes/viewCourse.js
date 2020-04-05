@@ -6,7 +6,7 @@ module.exports = {
         let user = req.session.username;
         let typeperson = req.session.typelogperson;
         if (token) {
-            if (typeperson == 'Student') {
+            if (typeperson == 'student') {
                 let querycheck = "SELECT * FROM study_inclassroom WHERE IDStudent = "+ user[0].IDStudent +" AND IDRoom = "+ id +" ";
                 db.query(querycheck,(err,resultcheck) => {
                     if (err) {
@@ -34,7 +34,7 @@ module.exports = {
                         res.send('คุณไม่ได้อยู๋ในห้องเรียน')
                     }
                 });
-            } else if (typeperson == 'Teacher') {
+            } else if (typeperson == 'teacher') {
                 let querycheck = "SELECT * FROM create_classroom WHERE IDRoom = "+ id +" AND IDTeacher = "+ user[0].IDTeacher +" ";
                 db.query(querycheck,(err,resultcheck) => {
                     if (err) {

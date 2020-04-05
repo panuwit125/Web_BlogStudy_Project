@@ -70,7 +70,7 @@
             <form action="/study/<%= classroom[0].IDRoom %>" method="POST" enctype="multipart/form-data">
                 <% if (token) { %>
                     
-                    <% if ( typeperson == 'Student') { %>
+                    <% if ( typeperson == 'student') { %>
                         
                             <!-- LIST TABLE -->
                             <div class="container" style="margin-top: 40px;font-family: 'Pridi', serif;">
@@ -107,7 +107,7 @@
                         <!-- END LIST TABLE -->
 
 
-                  <% } else if ( typeperson == 'Teacher') { %>
+                  <% } else if ( typeperson == 'teacher') { %>
                         <!-- LIST TABLE -->
                         <div class="container" style="margin-top: 40px;font-family: 'Pridi', serif;">
                             <div class="row">

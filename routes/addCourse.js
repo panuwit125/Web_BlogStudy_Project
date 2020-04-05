@@ -1,11 +1,12 @@
 module.exports = {
     addCourse: (req,res) => {
+        let message = "";
         let namecourse = req.body.namecourse;
         let description = req.body.inputeditor;
         let id = req.params.id;
         let typeperson = req.session.typelogperson;
         if (namecourse && description) {
-            if ( typeperson == 'Teacher') {
+            if ( typeperson == 'teacher') {
                 let query = "SELECT * FROM create_classroom WHERE IDRoom = "+ id +"";
                 db.query(query,(err,result) => {
                     if (err) {
@@ -41,12 +42,13 @@ module.exports = {
         }
     },
     addCoursePage: (req,res) => {
+        let message = "";
         let token = req.session.loggedin;
         let user = req.session.uesrname;
         let id = req.params.id;
         if (token) {
             let typeperson = req.session.typelogperson;
-            if ( typeperson == 'Teacher' ) {
+            if ( typeperson == 'teacher' ) {
                 let query = "SELECT * FROM create_classroom WHERE IDRoom = "+ id +"";
                 db.query(query,(err,result) => {
                     if (err) {

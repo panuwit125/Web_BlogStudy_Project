@@ -80,7 +80,7 @@ module.exports = {
                 if (token) {
                     let typeperson = req.session.typelogperson;
                     let IDStudent = req.session.username[0].IDStudent;
-                    if (typeperson == 'Student') {
+                    if (typeperson == 'student') {
                         let querycheck ="SELECT * FROM study_inclassroom WHERE IDStudent = "+ IDStudent +" AND IDRoom = "+ id +" ";
                         db.query(querycheck,(err,checkstudent) => {
                             if (err) {
@@ -116,7 +116,7 @@ module.exports = {
                                 });
                             }
                         });
-                    } else if (typeperson == 'Teacher') {
+                    } else if (typeperson == 'teacher') {
                         let querycheck = "SELECT * FROM create_classroom WHERE IDRoom ="+ id +" AND IDTeacher = "+ req.session.username[0].IDTeacher +"";
                         db.query(querycheck,(err,resultcheck) => {
                             if (err) {
@@ -155,8 +155,7 @@ module.exports = {
                         
                     } else {
                         req.session.loggedin = false;
-                        //res.redirect('/study');
-                        res.send('คุณไม่ใช่นักเรียนโวยยย');
+                        res.redirect('/study');
                     }
                 } else {
                     req.session.loggedin = false;
