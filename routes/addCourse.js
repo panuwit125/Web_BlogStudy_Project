@@ -19,7 +19,25 @@ module.exports = {
                                 return res.status(500).send(err);
                             }
                             if ( checkresult.length > 0 ) {
-                                res.send('ชื่อนี้ถูกใช้ไปแล้ว')
+                                let query = "SELECT * FROM create_classroom WHERE IDRoom = "+ id +"";
+                                db.query(query,(err,result) => {
+                                    if (err) {
+                                        return res.status(500).send(err);
+                                    }
+                                    if (result.length > 0) {
+                                        res.render('addcourse.ejs',{
+                                            token: req.session.loggedin,
+                                            user: req.session.uesrname,
+                                            classroom: result,
+                                            typeperson: req.session.typelogperson,
+                                            name: req.session.username[0].Username,
+                                            money: req.session.username[0].Money,
+                                            message: "ชื่อนี้ถูกใช้งานแล้ว"
+                                        });
+                                    } else {
+                                        res.send('ไม่มีห้องเรียนนี้ err')
+                                    }
+                                });
                             } else {
                                 let queryinsert = "INSERT INTO study_course (IDRoom,NameCourse,DescriptionCourse) VALUES ("+ id +",'"+ namecourse +"','"+ description +"')";
                                 db.query(queryinsert,(err,insert) => {
@@ -61,7 +79,8 @@ module.exports = {
                             classroom: result,
                             typeperson: req.session.typelogperson,
                             name: req.session.username[0].Username,
-                            money: req.session.username[0].Money
+                            money: req.session.username[0].Money,
+                            message: ""
                         });
                     } else {
                         res.send('ไม่มีห้องเรียนนี้ err')
@@ -71,7 +90,8 @@ module.exports = {
                 res.send('คุณไม่ใช่ครู');
             }
         } else {
-            res.send('err');
+            req.session.loggedin = false;
+            res.redirect('/');
         }
     }
 }

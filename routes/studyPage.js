@@ -31,12 +31,14 @@ module.exports = {
         });
     },
     addStudyPage: (req,res) => {
+        let message = "";
         let token = req.session.loggedin;
         if (token) {
             res.render('addstudy.ejs',{
                 user: req.session.username,
                 name: req.session.username[0].Username,
-                money: req.session.username[0].Money
+                money: req.session.username[0].Money,
+                message: ""
             });
         } else {
             req.session.loggedin = false;
@@ -44,25 +46,40 @@ module.exports = {
         }
     },
     addStudy: (req,res) => {
+        let message = "";
         let namestudy = req.body.namestudy;
         let description = req.body.inputeditor;
         let token = req.session.loggedin;
         let Idteacher = req.session.username;
         if (token) {
-            let query = "SELECT * FROM create_classroom WHERE NameClassroom = '"+ namestudy +"'";
-            db.query(query,(err,result) => {
-                if (err) {
-                    return res.status(500).send(err)
-                }
-                if (result.length > 0) {
-                    res.redirect('/study');
-                } else {
-                    let queryimport = "INSERT INTO create_classroom (IDTeacher,NameClassroom,DescriptionClass,NumberStudent) VALUES ("+ Idteacher[0].IDTeacher +",'"+ namestudy +"','"+ description +"',0)";
-                    db.query(queryimport,(err,results) => {
-                        res.redirect('/study');
-                    });
-                }
-            });
+            if (namestudy && description) {
+                let query = "SELECT * FROM create_classroom WHERE NameClassroom = '"+ namestudy +"'";
+                db.query(query,(err,result) => {
+                    if (err) {
+                        return res.status(500).send(err)
+                    }
+                    if (result.length > 0) {
+                        res.render('addstudy.ejs',{
+                            user: req.session.username,
+                            name: req.session.username[0].Username,
+                            money: req.session.username[0].Money,
+                            message: "ชื่อนี้มีคนใช้แล้ว"
+                        });
+                    } else {
+                        let queryimport = "INSERT INTO create_classroom (IDTeacher,NameClassroom,DescriptionClass,NumberStudent) VALUES ("+ Idteacher[0].IDTeacher +",'"+ namestudy +"','"+ description +"',0)";
+                        db.query(queryimport,(err,results) => {
+                            res.redirect('/study');
+                        });
+                    }
+                });
+            } else {
+                res.render('addstudy.ejs',{
+                    user: req.session.username,
+                    name: req.session.username[0].Username,
+                    money: req.session.username[0].Money,
+                    message: "กรุณากรอกให้ครบ"
+                });
+            }
         } else {
             req.session.loggedin = false;
             res.redirect('/study');
@@ -202,7 +219,8 @@ module.exports = {
                 })
             });
         } else {
-            res.send('กรุณาล็อคอิน');
+            req.session.loggedin = false;
+            res.redirect('/study');
         }  
     }
 }

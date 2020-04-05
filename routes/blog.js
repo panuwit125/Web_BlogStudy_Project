@@ -30,14 +30,16 @@ module.exports = {
     }
   },
   addblogPage: (req,res) => {
+    let message = "";
     if (req.session.loggedin) {
       res.render('addblog.ejs',{
         results: req.session.loggedin,
         name: req.session.username[0].Username,
-        money: req.session.username[0].Money
+        money: req.session.username[0].Money,
+        message: ""
       });
     } else {
-      redirect('/blog')
+      res.redirect('/blog')
     }
   },
   addblogdata: (req,res) => {
@@ -48,7 +50,12 @@ module.exports = {
       let query = "SELECT * FROM blog_studentandteacher WHERE NameBlog = '"+ name +"'";
       db.query(query,(err,result) => {
         if (result.length > 0) {
-          message = "Name is not avalable";
+          res.render('addblog.ejs',{
+            message: "กรุณากรอกให้ครบ",
+            results: req.session.loggedin,
+            name: req.session.username[0].Username,
+            money: req.session.username[0].Money
+          });
         } else {
           let queryinsert = "INSERT INTO blog_studentandteacher (IDStudentOrTeacher,NameBlog,Description) VALUES ('"+ req.session.username[0].Username +"','"+ name +"','"+ description +"')";
           db.query(queryinsert,(err,result) => {
@@ -59,9 +66,17 @@ module.exports = {
           });
         }
       });
+    } else {
+      res.render('addblog.ejs',{
+        message: "กรุณากรอกให้ครบ",
+        results: req.session.loggedin,
+        name: req.session.username[0].Username,
+        money: req.session.username[0].Money
+      });
     }
   },
   viewblogPage: (req,res) => {
+    let message = "";
     let blogid = req.params.id;
     let query = "SELECT * FROM blog_studentandteacher WHERE IDBlogStudent = '"+ blogid +"'";
     db.query(query,(err,result) => {
@@ -78,13 +93,15 @@ module.exports = {
                 token: req.session.loggedin,
                 name: req.session.username[0].Username,
                 money: req.session.username[0].Money,
-                comment: results
+                comment: results,
+                message: ""
             }); 
             } else {
               res.render('viewblog.ejs',{
                 idblog: result,
                 comment: results,
-                token: ""
+                token: "",
+                message: ""
               }); 
             }
         });
@@ -94,21 +111,56 @@ module.exports = {
     });
   },
   commentblog: (req,res) => {
+    let message = "";
     let cmtext = req.body.textareacomment;
     let blogid = req.params.id;
-    let query = "SELECT * FROM blog_studentandteacher WHERE IDBlogStudent = '"+ blogid +"'";
-    db.query(query,(err,result) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      if (result.length > 0) {
-        let querysave = "INSERT INTO comment_blog (IDBlogStudent,Comment) VALUES ("+ blogid +",'"+ cmtext +"')";
-        db.query(querysave,(err,result) => {
-          res.redirect('/blog/'+blogid);
-        });
-      } else {
-        res.send('err'+blogid)
-      }
-    });
+    if (cmtext) {
+      let query = "SELECT * FROM blog_studentandteacher WHERE IDBlogStudent = '"+ blogid +"'";
+      db.query(query,(err,result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        if (result.length > 0) {
+          let querysave = "INSERT INTO comment_blog (IDBlogStudent,Comment) VALUES ("+ blogid +",'"+ cmtext +"')";
+          db.query(querysave,(err,result) => {
+            res.redirect('/blog/'+blogid);
+          });
+        } else {
+          res.send('err'+blogid)
+        }
+      });
+    } else {
+      let query = "SELECT * FROM blog_studentandteacher WHERE IDBlogStudent = '"+ blogid +"'";
+      db.query(query,(err,result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        if (result.length > 0) {
+          let cmquery = "SELECT * FROM comment_blog WHERE IDBlogStudent = "+ blogid +"";
+          db.query(cmquery,(err,results) => {
+              if (req.session.loggedin){
+                res.render('viewblog.ejs',{
+                  idcm: blogid,
+                  idblog: result,
+                  token: req.session.loggedin,
+                  name: req.session.username[0].Username,
+                  money: req.session.username[0].Money,
+                  comment: results,
+                  message: "กรุณากรอกแสดงความคิดเห็น"
+              }); 
+              } else {
+                res.render('viewblog.ejs',{
+                  idblog: result,
+                  comment: results,
+                  token: "",
+                  message: ""
+                }); 
+              }
+          });
+        } else {
+          res.redirect('/')
+        }
+      });
+    }
   }
 }

@@ -64,7 +64,15 @@
             <p><%- classroom[0].DescriptionClass %></p>
         </div>
     </div>
+    <% if (check) { %>
+        <div style="width: 90%;margin: auto;">
+            <a href="/study/<%= classroom[0].IDRoom %>/addcourse" class="btn btn-lg" id="buttoncreate" style="width: 100%;" >เพิ่มบทเรียน</a>
+        </div>
+    <% } else { %>
+
+    <% } %>  
 </div>
+
 <div>
             <!--------------------------------------->  
             <form action="/study/<%= classroom[0].IDRoom %>" method="POST" enctype="multipart/form-data">
@@ -73,7 +81,7 @@
                     <% if ( typeperson == 'student') { %>
                         
                             <!-- LIST TABLE -->
-                            <div class="container" style="margin-top: 40px;font-family: 'Pridi', serif;">
+                            <div class="container" style="margin-top: 20px;font-family: 'Pridi', serif;">
                                 <div class="row">
                                     <!-- THEAD-->
                                     <% if (check.length > 0) { %>
@@ -109,7 +117,7 @@
 
                   <% } else if ( typeperson == 'teacher') { %>
                         <!-- LIST TABLE -->
-                        <div class="container" style="margin-top: 40px;font-family: 'Pridi', serif;">
+                        <div class="container" style="margin-top: 20px;font-family: 'Pridi', serif;">
                             <div class="row">
                                 <!-- THEAD-->
                                 <% if (check.length > 0) { %>

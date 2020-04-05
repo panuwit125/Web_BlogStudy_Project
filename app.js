@@ -58,7 +58,7 @@ app.get('/',indexRouterPage);
 app.get('/blog', blogRouterPage);
 app.get('/blog/add',addblogPage);
 app.get('/blog/:id',viewblogPage);
-app.post('/blog/add/datainput',addblogdata);
+app.post('/blog/add',addblogdata);
 app.post('/blog/:id',commentblog);
 app.get('/login', loginRouterPage);
 app.post('/login', regisRouter);
