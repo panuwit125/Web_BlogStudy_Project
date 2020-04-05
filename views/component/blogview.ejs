@@ -1,38 +1,85 @@
-<div class="container" style="margin-top: 20px;">
-    <div style="border-bottom: 2px solid black;padding: 10px;">
-         <h2><%= idblog[0].NameBlog %></h2>
+<link href="https://fonts.googleapis.com/css?family=Pridi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        .boxmodel3 {
+            width: 90%;
+
+            background-color: #223c50;
+            border-radius: 5px;
+            border: 1px solid #223c50;
+        }
+    </style>
+<!-- BLOG VIEW -->
+<div class="container" style="margin-top: 70px;font-family: 'Pridi', serif;">
+    <div class="boxmodel3" style="margin: auto;padding: 30px;">
+        <div style="color: white;border-bottom: 4px solid #4c6374;">
+            <h3>ผู้เขียน : <%= idblog[0].IDStudentOrTeacher %></h3>
+        </div>
+        <div style="margin-left: 50px;color: white;margin-top: 20px;">
+            <h2><%= idblog[0].NameBlog %></h2>
+        </div>
+        <div style="width: 95%;margin: auto;background-color: white;border-radius: 5px;padding: 30px;">
+            <p><%- idblog[0].Description %></p>
+        </div>
     </div>
-    <div style="border-bottom: 2px solid black;padding: 10px;margin-top: 10px;">
-        <%- idblog[0].Description %>
-    </div>
-    <h4 style="margin-top: 10px;">Comment</h4>
-    <% if (token) { %>
-        <form action="/blog/<%= idcm %>" method="POST" enctype="multipart/form-data" >
-            <div class="form-group">
-                <textarea rows="4" cols="80" class="form-control" name="textareacomment">แสดงความคิดเห็นที่นี้</textarea> 
+  </div>
+  <!-- END BLOG VIEW -->
+  <!-- COMMENT -->
+    <div class="container" style="margin-top: 20px;font-family: 'Pridi', serif;">
+    <div style="width: 90%;margin: auto;">
+        <% if (token) { %>
+        <form action="/blog/<%= idcm %>" method="POST" enctype="multipart/form-data">
+        <div class="row">
+             <div class="col-3" style="text-align: right;">
+                <h4>แสดงความคิดเห็น</h4>
+                <button type="submit" class="btn btn-dark btn-lg">เพิ่มความคิดเห็น</button>
             </div>
-            <button class="btn btn-dark">ยืนยัน</button>
-        </form>
-    <% } else { %>
+            <div class="col-9">
+                <textarea class="form-control" name="textareacomment" rows="6"></textarea>
+                </div>
+            </div>
+        </div>
+        </form>   
+        <% } else { %>
         <form>
-            <div class="form-group">
-            <textarea rows="4" cols="80" class="form-control">แสดงความคิดเห็นที่นี้</textarea> 
-            </div>
-            <button class="btn btn-dark">กรุณาเข้าสู่ระบบ</button>
+            <div class="row">
+                <div class="col-3" style="text-align: right;">
+                   <h4>แสดงความคิดเห็น</h4>
+                   <button type="submit" class="btn btn-dark btn-lg">กรุณาเข้าสู่ระบบ</button>
+               </div>
+               <div class="col-9">
+                   <textarea class="form-control" name="textareacomment" rows="6"></textarea>
+                   </div>
+               </div>
+           </div>
         </form>
-    <% } %>
-    <% if (comment.length > 0) { %>
-        <h3>ความคิดเห็น</h3>
-        <ol class="a">
-        <% comment.forEach((cm,index) => { %>
-            <div style="border: 2px solid black;padding: 20px;margin-bottom: 15px;">
-              <h4><li><%= cm.Comment %></li></h4>
-            </div>
-        <% }); %>
-        </ol>
+        <% } %>
+    </div>
+  <!-- END COMMENT -->
+  <!-- COMMENT VIEW-->
+  <% if (comment.length > 0) { %>
+<div class="container" style="margin-top: 20px;font-family: 'Pridi', serif;">
+    <% comment.forEach((cm,index) => { %>
+    <div class="boxmodel3" style="margin: auto;padding: 20px;color: white;margin-bottom: 10px;">
+        <div>
+            <h5 style="text-decoration: underline;">ความคิดเห็นที่ <%= index+1 %></h5>
+        </div>
+        <div>
+            โดย: <%= cm.IDBlogStudent %>
+        </div>
+        <div>
+            <%= cm.Comment %>
+        </div>
+    </div>
+    <% }); %>
     <% } else { %>
-       <div style="border: 2px solid black;">
+        <div style="border: 2px solid black;">
             <h5>ไม่มีการแสดงความคิดเห็น</h5>
         </div> 
     <% } %>
 </div>
+  <!-- END COMMENT VIEW-->
