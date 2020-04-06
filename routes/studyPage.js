@@ -66,8 +66,11 @@ module.exports = {
                             message: "ชื่อนี้มีคนใช้แล้ว"
                         });
                     } else {
-                        let queryimport = "INSERT INTO create_classroom (IDTeacher,NameClassroom,DescriptionClass,NumberStudent) VALUES ("+ Idteacher[0].IDTeacher +",'"+ namestudy +"','"+ description +"',0)";
+                        let queryimport = "INSERT INTO create_classroom (IDTeacher,NameClassroom,DescriptionClass,NumberStudent) VALUES ('"+ Idteacher[0].Username +"','"+ namestudy +"','"+ description +"',0)";
                         db.query(queryimport,(err,results) => {
+                            if (err ) {
+                                return res.status(500).send(err)
+                            }
                             res.redirect('/study');
                         });
                     }
@@ -96,9 +99,9 @@ module.exports = {
             if (result.length > 0) {
                 if (token) {
                     let typeperson = req.session.typelogperson;
-                    let IDStudent = req.session.username[0].IDStudent;
+                    let IDStudent = req.session.username[0].Username;
                     if (typeperson == 'student') {
-                        let querycheck ="SELECT * FROM study_inclassroom WHERE IDStudent = "+ IDStudent +" AND IDRoom = "+ id +" ";
+                        let querycheck ="SELECT * FROM study_inclassroom WHERE IDStudent = '"+ IDStudent +"' AND IDRoom = "+ id +" ";
                         db.query(querycheck,(err,checkstudent) => {
                             if (err) {
                                 return res.status(500).send(err);
@@ -134,7 +137,7 @@ module.exports = {
                             }
                         });
                     } else if (typeperson == 'teacher') {
-                        let querycheck = "SELECT * FROM create_classroom WHERE IDRoom ="+ id +" AND IDTeacher = "+ req.session.username[0].IDTeacher +"";
+                        let querycheck = "SELECT * FROM create_classroom WHERE IDRoom ="+ id +" AND IDTeacher = '"+ req.session.username[0].Username +"'";
                         db.query(querycheck,(err,resultcheck) => {
                             if (err) {
                                 return res.status(500).send(err)
@@ -192,12 +195,12 @@ module.exports = {
         let roomid = req.params.id;
         let queryroom = "SELECT * FROM create_classroom WHERE IDRoom ="+ roomid +"";
         if (token) {
-            let IDStudent = req.session.username[0].IDStudent;
+            let IDStudent = req.session.username[0].Username;
             db.query(queryroom,(err,result) => {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                let querycheck = "SELECT * FROM study_inclassroom WHERE IDStudent="+ IDStudent +"";
+                let querycheck = "SELECT * FROM study_inclassroom WHERE IDStudent='"+ IDStudent +"'";
                 db.query(querycheck,(err,resultcheck) => {
                     if (err) {
                         return res.status(500).send(err);
@@ -205,7 +208,7 @@ module.exports = {
                     if (resultcheck.length > 0) {
                         res.send("คุณเข้าห้องแล้ว");
                     } else {
-                        let queryinsert = "INSERT INTO study_inclassroom (IDStudent,IDRoom) VALUES ("+ IDStudent +","+ roomid +")";
+                        let queryinsert = "INSERT INTO study_inclassroom (IDStudent,IDRoom) VALUES ('"+ IDStudent +"',"+ roomid +")";
                         db.query(queryinsert,(err,results) => {
                             let queryupdate = "UPDATE create_classroom SET NumberStudent = NumberStudent + 1 WHERE IDRoom = "+ roomid +"";
                             db.query(queryupdate,(err,updateresult) => {

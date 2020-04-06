@@ -57,7 +57,7 @@ module.exports = {
             money: req.session.username[0].Money
           });
         } else {
-          let queryinsert = "INSERT INTO blog_studentandteacher (IDStudentOrTeacher,NameBlog,Description) VALUES ('"+ req.session.username[0].Username +"','"+ name +"','"+ description +"')";
+          let queryinsert = "INSERT INTO blog_studentandteacher (IDStudentOrTeacher,NameBlog,Description,Viewblog) VALUES ('"+ req.session.username[0].Username +"','"+ name +"','"+ description +"',0)";
           db.query(queryinsert,(err,result) => {
             if (err) {
               return res.status(500).send(err);
@@ -78,7 +78,7 @@ module.exports = {
   viewblogPage: (req,res) => {
     let message = "";
     let blogid = req.params.id;
-    let query = "SELECT * FROM blog_studentandteacher WHERE IDBlogStudent = '"+ blogid +"'";
+    let query = "SELECT * FROM blog_studentandteacher WHERE IDBlogStudent = "+ blogid +"";
     db.query(query,(err,result) => {
       if (err) {
         return res.status(500).send(err);
@@ -87,22 +87,36 @@ module.exports = {
         let cmquery = "SELECT * FROM comment_blog WHERE IDBlogStudent = "+ blogid +"";
         db.query(cmquery,(err,results) => {
             if (req.session.loggedin){
-              res.render('viewblog.ejs',{
-                idcm: blogid,
-                idblog: result,
-                token: req.session.loggedin,
-                name: req.session.username[0].Username,
-                money: req.session.username[0].Money,
-                comment: results,
-                message: ""
-            }); 
+              let update = "UPDATE blog_studentandteacher SET Viewblog = Viewblog+1 WHERE IDBlogStudent = "+ blogid +" ";
+              db.query(update,(err,update) => {
+                if (err) {
+                  return res.status(500).send(err);
+                }
+                
+                  res.render('viewblog.ejs',{
+                    idcm: blogid,
+                    idblog: result,
+                    token: req.session.loggedin,
+                    name: req.session.username[0].Username,
+                    money: req.session.username[0].Money,
+                    comment: results,
+                    message: ""
+                }); 
+              });
+              
             } else {
+              let update = "UPDATE blog_studentandteacher SET Viewblog = Viewblog+1 WHERE IDBlogStudent = "+ blogid +" ";
+              db.query(update,(err,update) => {
+                if (err) {
+                  return res.status(500).send(err);
+                }
               res.render('viewblog.ejs',{
                 idblog: result,
                 comment: results,
                 token: "",
                 message: ""
-              }); 
+              });
+            }); 
             }
         });
       } else {
@@ -121,7 +135,7 @@ module.exports = {
           return res.status(500).send(err);
         }
         if (result.length > 0) {
-          let querysave = "INSERT INTO comment_blog (IDBlogStudent,Comment) VALUES ("+ blogid +",'"+ cmtext +"')";
+          let querysave = "INSERT INTO comment_blog (IDBlogStudent,Comment,Person) VALUES ("+ blogid +",'"+ cmtext +"','"+ req.session.username[0].Username +"')";
           db.query(querysave,(err,result) => {
             res.redirect('/blog/'+blogid);
           });

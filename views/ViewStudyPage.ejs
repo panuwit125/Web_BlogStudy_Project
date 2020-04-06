@@ -65,9 +65,13 @@
         </div>
     </div>
     <% if (check) { %>
-        <div style="width: 90%;margin: auto;">
+        <% if (typeperson == "teacher") { %>
+         <div style="width: 90%;margin: auto;">
             <a href="/study/<%= classroom[0].IDRoom %>/addcourse" class="btn btn-lg" id="buttoncreate" style="width: 100%;" >เพิ่มบทเรียน</a>
-        </div>
+        </div>   
+        <% } else { %>
+
+        <% } %>
     <% } else { %>
 
     <% } %>  
@@ -108,7 +112,9 @@
                                         <!-- END TBODY-->
                                     </div>
                                 <% } else { %>
-                                    <button  type="submit" class="btn btn-dark btn-secondary  btn-block" >เข้าร่วมห้องเรียน</button>
+                                    <form method="POST" action="/study/<%= classroom[0].IDRoom %>" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-dark btn-secondary  btn-block" >เข้าร่วมห้องเรียน</button>
+                                    </form>
                                 <% } %>
                                 </div>
                             </div>
