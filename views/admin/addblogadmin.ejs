@@ -1,0 +1,33 @@
+
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+<div style="font-family: 'Pridi', serif;">
+  <%- include('component/navbaradmin.ejs') -%>
+    <div class="container" style="padding-top: 10px ;margin-top: 70px;">
+        <h1>เพิ่มข่าวสาร</h1><a href="/blog">ย้อนกลับ</a>
+          <form action="/admin/add" method="POST" enctype="multipart/form-data"> 
+              <div class="form-group">
+                <label for="exampleFormControlInput1">ชื่อ</label>
+                <input type="text" class="form-control" id="inputname" name="inputname" placeholder="ชื่อของกระทู้" required>
+              </div>
+              <div class="form-group">
+                <label>รายละเอียด</label><br>
+                <textarea name="inputeditor" rows="8" cols="80" class="form-control" id="inputeditor" required></textarea>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">เพิ่มกระทู้</button>
+              </div>
+          </form>
+          <% if( message == "") { %>
+
+          <% } else { %>
+            <div class="alert alert-warning" role="alert">
+              <%= message %>
+            </div> 
+          <% } %>
+          
+    </div>
+    <script>
+      CKEDITOR.replace( 'inputeditor' );
+    </script>
+</div>

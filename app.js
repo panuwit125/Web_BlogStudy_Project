@@ -7,9 +7,9 @@ const path = require('path');
 var port=process.env.PORT || 3000;
 const app = express();
 const {indexRouterPage} = require('./routes/index');
-const {blogRouterPage,addblogPage,addblogdata,viewblogPage,commentblog} = require('./routes/blog');
+const {blogRouterPage,addblogPage,addblogdata,viewblogPage,commentblog,blogstaffrouter,viewblogstaff} = require('./routes/blog');
 const {loginRouterPage,regisRouter,logoutRouter} = require('./routes/login');
-const {adminRouterPage} = require('./routes/admin');
+const {adminRouterPage,viewblogadmin,addblogadmin,adddata,deleteblog,blogadminview,deleteblogadmin} = require('./routes/admin');
 const {studyRouterPage,addStudyPage,addStudy,viewStudyPage,joinclass} = require('./routes/studyPage');
 const {addCoursePage,addCourse} = require('./routes/addCourse');
 const {viewCourse} = require('./routes/viewCourse');
@@ -74,6 +74,16 @@ app.get('/study/:id/addcourse',addCoursePage);
 app.post('/study/:id/addcourse',addCourse);
 
 app.get('/study/:id/:idcourse',viewCourse);
+
+app.get('/admin/blog',viewblogadmin);
+app.get('/admin/add',addblogadmin);
+app.post('/admin/add',adddata);
+app.get('/admin/blog/:id',deleteblog);
+app.get('/admin/blogadmin',blogadminview);
+app.get('/admin/blogadmin/:id',deleteblogadmin);
+
+app.get('/blogstaff',blogstaffrouter);
+app.get('/blogstaff/:id',viewblogstaff);
 
 app.listen(port,()=> {
     console.log('Server Running')

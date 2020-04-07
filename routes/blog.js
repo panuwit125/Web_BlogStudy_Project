@@ -176,5 +176,60 @@ module.exports = {
         }
       });
     }
+  },
+  blogstaffrouter: (req,res) => {
+    if (req.session.loggedin) {
+      let query = "SELECT * FROM blog_staff";
+      db.query(query,(err,result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        res.render('viewblogstaff.ejs',{
+          results: req.session.loggedin,
+          name: req.session.username[0].Username,
+          money: req.session.username[0].Money,
+          resultblog: result
+        });
+      });
+      
+    } else {
+      let query = "SELECT * FROM blog_staff";
+      db.query(query,(err,result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        res.render('viewblogstaff.ejs',{
+          results:"",
+          resultblog:result
+        });
+      });
+    }
+  },
+  viewblogstaff: (req,res) => {
+    let message = "";
+    let blogid = req.params.id;
+    let query = "SELECT * FROM blog_staff WHERE IDBlogstaff = "+ blogid +"";
+    db.query(query,(err,result) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      if (req.session.loggedin) {
+          res.render('viewblogstaffpage.ejs',{
+            idcm: blogid,
+            idblog: result,
+            token: req.session.loggedin,
+            name: req.session.username[0].Username,
+            money: req.session.username[0].Money,
+            message: ""
+        });
+      } else {
+        res.render('viewblogstaffpage.ejs',{
+          idcm: blogid,
+          idblog: result,
+          token: req.session.loggedin,
+          message: ""
+      });
+      }
+    });
   }
 }
