@@ -2,14 +2,28 @@ module.exports = {
     adminRouterPage: (req,res) => {
         let token = req.session.loggedin;
         let admin = req.session.username;
-        if (token) {
-            res.render('admin/indexadmin.ejs',{
-                admin:admin
+        let query = "SELECT * FROM blog_staff";
+        db.query(query,(err,result) => {
+            if (err) {
+                return res.status(500).send(err)
+            }
+            let queryblog = "SELECT * FROM blog_studentandteacher"
+            db.query(queryblog,(err,results) => {
+                if (err) {
+                    return res.status(500).send(err)
+                }
+                if (token) {
+                    res.render('admin/indexadmin.ejs',{
+                        admin:admin,
+                        resultblog: results,
+                        resultblogstaff: result
+                    });
+                } else {
+                    req.session.loggedin = false;
+                    res.redirect('/')
+                }      
             });
-        } else {
-            req.session.loggedin = false;
-            res.redirect('/')
-        }
+        });
     },
     viewblogadmin: (req,res) => {
         let token = req.session.loggedin;

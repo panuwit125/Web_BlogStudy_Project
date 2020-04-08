@@ -7,7 +7,7 @@ module.exports = {
         let typeperson = req.session.typelogperson;
         if (token) {
             if (typeperson == 'student') {
-                let querycheck = "SELECT * FROM study_inclassroom WHERE IDStudent = "+ user[0].IDStudent +" AND IDRoom = "+ id +" ";
+                let querycheck = "SELECT * FROM study_inclassroom WHERE IDStudent = '"+ user[0].Username +"' AND IDRoom = "+ id +" ";
                 db.query(querycheck,(err,resultcheck) => {
                     if (err) {
                         return res.status(500).send(err)

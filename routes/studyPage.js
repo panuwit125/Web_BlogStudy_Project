@@ -182,7 +182,8 @@ module.exports = {
                     res.render('ViewStudyPage.ejs',{
                         token: "",
                         classroom: result,
-                        typeperson: ""
+                        typeperson: "",
+                        check: ""
                     });
                 }
             } else {
@@ -200,7 +201,7 @@ module.exports = {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                let querycheck = "SELECT * FROM study_inclassroom WHERE IDStudent='"+ IDStudent +"'";
+                let querycheck = "SELECT * FROM study_inclassroom WHERE IDStudent='"+ IDStudent +"' AND IDRoom='"+ roomid +"'";
                 db.query(querycheck,(err,resultcheck) => {
                     if (err) {
                         return res.status(500).send(err);
